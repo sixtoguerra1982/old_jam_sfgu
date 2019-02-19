@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = current_user.posts
   end
 
   # GET /posts/1
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    # PENDING Add the current user to post
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save

@@ -11,17 +11,24 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" style="font-size:24px""></i><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle-o" style="font-size:24px""></i>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-
             <li><%=link_to 'Create Post', new_post_path %></li>
-            <li><a href="#">My Posts</a></li>
-            <li><a href="#">My Profile</a></li>
+            <li><%=link_to 'My Posts', posts_path %></li>
+            <li><%=link_to 'My Profile', edit_user_registration_path %></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Sign Out</a></li>
+            <li><%=link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
+        <% else %>
+          <li><%=link_to 'Register', new_user_registration_path %></li>
+          <li><%= link_to 'Log in', new_user_session_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar collapse -->
   </div><!-- /.container-fluid -->

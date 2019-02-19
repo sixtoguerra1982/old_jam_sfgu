@@ -9,7 +9,13 @@ Comment.delete_all
 Post.delete_all
 User.delete_all
 
-User.create([{ name: 'Alice' }, { name: 'Bob'}, {name: 'James'}])
+users = [
+  { name: 'Alice', email: 'alice@dsl.com' , password: 123456, password_confirmation: 123456 },
+  { name: 'Bob', email: 'bob@dsl.com' , password: 123456, password_confirmation: 123456 },
+  { name: 'James', email: 'bob@dsl.com' , password: 123456, password_confirmation: 123456}
+]
+
+User.create(users)
 
 10.times do
   rand = rand(0..7)
