@@ -3,8 +3,11 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
   }
   resources :posts do
-      resources :comments
+      resources :comments, shallow: true
   end
+
+  resources :comments, only: [:index]
+
   get 'home/index'
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
