@@ -19,7 +19,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       post post_comments_url(@comment.post), params: { comment: { content: @comment.content, post_id: @comment.post_id } }
     end
 
-    assert_redirected_to comment_url(Comment.last)
+    assert_redirected_to post_url(@comment.post)
   end
 
 
@@ -34,10 +34,18 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy comment" do
+    sign_out(@user)
+    sign_in(users(:one))
     assert_difference('Comment.count', -1) do
       delete comment_url(@comment)
     end
 
     assert_redirected_to comments_url
+  end
+
+  test "should not destroy comment" do
+    assert_difference('Comment.count', 0) do
+      delete comment_url(@comment)
+    end
   end
 end
