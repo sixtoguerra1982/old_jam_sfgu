@@ -17,7 +17,7 @@ User.create([{ name: 'Alice' }, { name: 'Bob'}, {name: 'James'}])
   post = Post.create(
     title: Faker::Lorem.sentence(3),
     content: Faker::Lorem.paragraphs,
-    image: Faker::LoremPixel.image('300x200'),
+    image: 'https://picsum.photos/200/300',
     user: user
   )
   rand.times do
