@@ -26,7 +26,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     # PENDING: ADD the current user to the comment
-
+    byebug
+    @commet.user = current_user
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
