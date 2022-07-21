@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @post = Post.find(params[:post_id])
   end
 
   # GET /comments/new
@@ -26,8 +27,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     # PENDING: ADD the current user to the comment
-    byebug
-    @commet.user = current_user
+    @comment.user = current_user
+    @comment.post = Post.find(params[:post_id])
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
