@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @post = Post.find(params[:post_id])
   end
 
   # GET /comments/1/edit
@@ -26,6 +27,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    # byebug
     # PENDING: ADD the current user to the comment
     @comment.user = current_user
     @comment.post = Post.find(params[:post_id])
