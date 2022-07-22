@@ -9,6 +9,12 @@
       </button>
         <%= link_to root_path, :class=> "navbar-brand" do %><i class="fa fa-fw fa-home"></i><% end %>
     </div>
+
+    <% if current_user %>
+     <span><%= current_user.email %></span>
+    <% end %>
+
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

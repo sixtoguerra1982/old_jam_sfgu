@@ -59,10 +59,14 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.admin?
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to comments_url, notice: 'You are not allow to delete comments'
     end
   end
 
