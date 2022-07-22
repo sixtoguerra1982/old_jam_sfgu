@@ -15,9 +15,9 @@
         </div>
       </div>
       <div class="panel-footer">
-        <button class="btn btn-primary" type="button">
-          Comentarios <span class="badge"><%= post.comments.count %></span>
-        </button></span>
+        
+        <%= link_to "Comentarios #{post.comments.count}", post_comments_path(post), class: "btn btn-primary"  %>
+
         Author: <%= post.user.name %>
       </div>
     </div>

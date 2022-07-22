@@ -1,15 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_role, only: [:edit, :destroy]
   # GET /posts
   # GET /posts.json
   def index
     # @posts = Post.all
-    if current_user.admin?
-      @posts = Post.all
-    else
+    # if current_user.admin?
+    #   @posts = Post.all
+    # else
       @posts = current_user.posts
-    end
+    # end
   end
 
   # GET /posts/1
@@ -73,6 +73,12 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def check_role
+      if @post.user_id != current_user.id
+        redirect_to posts_url, notice: 'Acceso no Autorizado'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
